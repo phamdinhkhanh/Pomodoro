@@ -134,7 +134,9 @@ public class LoginActivity extends AppCompatActivity {
         //Tao json tu String loginJson
         RequestBody loginBody = RequestBody.create(jsonMediaType, loginJson);
         //Tao loginService tu loginBody
-        loginService
+        //3.Create call
+        Call<LoginResponseJson> loginCall = loginService.login(loginBody);
+        loginCall
                 .login(loginBody)
                 .enqueue(new Callback<LoginResponseJson>() {
                     @Override
