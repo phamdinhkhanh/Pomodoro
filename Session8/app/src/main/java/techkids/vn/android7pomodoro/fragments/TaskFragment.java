@@ -22,6 +22,7 @@ import techkids.vn.android7pomodoro.activities.TaskActivity;
 import techkids.vn.android7pomodoro.adapters.TaskAdapter;
 import techkids.vn.android7pomodoro.adapters.viewholders.TaskViewHolder;
 import techkids.vn.android7pomodoro.databases.models.Task;
+import techkids.vn.android7pomodoro.networks.NetContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +36,7 @@ public class TaskFragment extends Fragment {
 
     private static String TAG = "TaskFragment";
 
-
+    NetContext netContext = new NetContext();
     public TaskFragment() {
         // Required empty public constructor
     }
@@ -46,6 +47,7 @@ public class TaskFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_task, container, false);
         setupUI(view);
+        netContext.getAllTask();
         return view;
     }
 
@@ -72,6 +74,14 @@ public class TaskFragment extends Fragment {
 
                 //TODO: Make TaskActivity and Fragment independent
                 ((TaskActivity)getActivity()).replaceFragment(taskDetailFragment, true);
+            }
+        });
+
+        taskAdapter.setImageBottonClickListener(new TaskAdapter.TaskImageBottonClickListener() {
+            @Override
+            public void onClick() {
+                Log.d(TAG,"PomodoroFragment");
+                replaceFragement(new PomodoroFragment());
             }
         });
 

@@ -20,6 +20,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
         void onItemClick(Task task);
     }
 
+    public interface TaskImageBottonClickListener {
+        void onClick();
+    }
+
+    private TaskImageBottonClickListener imageBottonClickListener;
+
+    public void setImageBottonClickListener(TaskImageBottonClickListener imageBottonClickListener) {
+        this.imageBottonClickListener = imageBottonClickListener;
+    }
+
     private TaskItemClickListener taskItemClickListener;
 
     public void setTaskItemClickListener(TaskItemClickListener taskItemClickListener) {
@@ -47,7 +57,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
 
 
         //khi click vao itemview se truyen task sang
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // send event to outside
@@ -55,7 +65,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskViewHolder> {
                     taskItemClickListener.onItemClick(task);
                 }
             }
-        });*/
+        });
+
+        holder.getIbPlay().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageBottonClickListener != null){
+                    imageBottonClickListener.onClick();
+                }
+            }
+        });
     }
 
     @Override

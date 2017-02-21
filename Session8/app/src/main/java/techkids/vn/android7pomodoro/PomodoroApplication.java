@@ -22,7 +22,7 @@ public class PomodoroApplication extends Application {
         SharedPrefs.init(this);
 
         for (Task task : DbContext.instance.allTasks()) {
-            Log.d(TAG, String.format("onCreate: %s", task));
+            //Log.d(TAG, String.format("onCreate: %s", task));
         }
     }
 }

@@ -16,12 +16,15 @@ import android.widget.EditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import techkids.vn.android7pomodoro.R;
 import techkids.vn.android7pomodoro.activities.TaskActivity;
 import techkids.vn.android7pomodoro.adapters.TaskColorAdapter;
 import techkids.vn.android7pomodoro.databases.DbContext;
 import techkids.vn.android7pomodoro.databases.models.Task;
 import techkids.vn.android7pomodoro.decorations.TaskColorDecor;
+import techkids.vn.android7pomodoro.networks.NetContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +32,7 @@ import techkids.vn.android7pomodoro.decorations.TaskColorDecor;
 public class TaskDetailFragment extends Fragment {
 
     private static String TAG = "TaskDetailFragment";
-
+    NetContext netContext = new NetContext();
     @BindView(R.id.rv_task_color)
     RecyclerView rvTaskColor;
 
@@ -118,7 +121,66 @@ public class TaskDetailFragment extends Fragment {
             Log.d(TAG,String.format("Vector size %d",DbContext.instance.allTasks().size()));
 
             getActivity().onBackPressed();
+
+            netContext.addNewTask();
         }
         return false;
+    }
+
+    /*public interface UserServices{
+        @Headers("Cache-Control: max-age=640000")
+        @GET("task")
+        Call<List<Task>> getTask();
+    }
+
+    public interface PostServices{
+        @POST("task")
+        Call<Task> createTasks(@Body Task task);
+    }*/
+
+    public void postTask(){
+        /*//1. Create httpClient
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request original = chain.request();
+
+                Request request = original.newBuilder()
+                        .addHeader("Authorization","JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODc2MDgzNjgsImlkZW50aXR5IjoiNThhYjFhMmM3OTA0ZjUwMDBiOWZkMjhhIiwiZXhwIjoxNDg3Njk0NzY4LCJuYmYiOjE0ODc2MDgzNjh9.yrMkVm095I4ImO9kQCt7GUrdDpuliKUbnhlfhZgdvd8")
+                        .method(original.method(),original.body())
+                        .build();
+            return chain.proceed(request);
+            };
+        });
+
+        OkHttpClient client = httpClient.build();*/
+        //1. Create retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://a-task.herokuapp.com/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        //2. Create Services
+        /*PostServices postServices = retrofit.create(PostServices.class);
+
+        //Task task = new Task("khanh","#FFFFFF",1.4f,false);
+        Call<Task> call = postServices.createTasks(task);
+        call.enqueue(new Callback<Task>() {
+            @Override
+            public void onResponse(Call<Task> call, Response<Task> response) {
+                if (response.body() != null) {
+                    Log.d(TAG, String.format("Response addTask %", response.body()));
+                } else {
+                    Log.d(TAG, String.format("ResponseFailure addTask"));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Task> call, Throwable t) {
+                Log.d(TAG,"Failure addTask");
+            }
+        });*/
+
+
     }
 }

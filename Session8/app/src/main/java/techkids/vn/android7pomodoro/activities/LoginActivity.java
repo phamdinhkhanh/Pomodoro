@@ -1,12 +1,9 @@
 package techkids.vn.android7pomodoro.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -25,6 +22,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import techkids.vn.android7pomodoro.R;
+import techkids.vn.android7pomodoro.networks.NetContext;
 import techkids.vn.android7pomodoro.networks.jsonmodels.LoginBodyJson;
 import techkids.vn.android7pomodoro.networks.jsonmodels.LoginResponseJson;
 import techkids.vn.android7pomodoro.networks.services.LoginService;
@@ -39,18 +37,18 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btRegister;
     private Button btLogin;
-
+    public static LoginBodyJson loginBodyJson;
     Retrofit retrofit;
 
     private String username;
     private String password;
     private String token;
-
+    NetContext netContext = new NetContext();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        skipLoginIfPossible();
+        //skipLoginIfPossible();
 
         setContentView(R.layout.activity_login);
 
@@ -78,6 +76,8 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+        netContext.getAllTask();
+        netContext.addNewTask();
 
     }
 
@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
     private void attemptLogin() {
         username = etUsername.getText().toString();
         password = etPassword.getText().toString();
-
+        loginBodyJson = new LoginBodyJson(username,password);
         sendLogin(username, password);
     }
 

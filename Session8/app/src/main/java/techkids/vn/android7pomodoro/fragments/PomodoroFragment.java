@@ -7,11 +7,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import techkids.vn.android7pomodoro.R;
 import techkids.vn.android7pomodoro.activities.TaskActivity;
 import techkids.vn.android7pomodoro.databases.models.Task;
@@ -21,14 +20,15 @@ import techkids.vn.android7pomodoro.databases.models.Task;
  */
 
 public class PomodoroFragment extends Fragment {
-    @BindView(R.id.pg)
-    ProgressBar progressBar;
 
-    @BindView(R.id.ib_play_2)
-    Button button;
+    //@Nullable
+    @BindView(R.id.tv_timer_name)
+    TextView timerName;
 
-    @BindView(R.id.tv_pr)
-    TextView textView;
+    //@Nullable
+    @BindView(R.id.tv_timer)
+    TextView timer;
+
 
     private Task task;
 
@@ -54,7 +54,7 @@ public class PomodoroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
+        View view =  inflater.inflate(R.layout.fragment_pomodoro, container, false);
         setupUI(view);
         return view;
     }
@@ -66,8 +66,9 @@ public class PomodoroFragment extends Fragment {
 
 
     public void setupUI(View view){
+        ButterKnife.bind(this, view);
         if(getActivity() instanceof TaskActivity){
-                ((TaskActivity) getActivity()).getSupportActionBar().setTitle(title);
+                ((TaskActivity) getActivity()).getSupportActionBar().setTitle("Timer");
         }
     }
 }

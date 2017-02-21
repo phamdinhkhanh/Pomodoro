@@ -32,6 +32,9 @@ public class TaskViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.ib_play)
     ImageButton ibPlay;
 
+    public ImageButton getIbPlay() {
+        return ibPlay;
+    }
 
     public static boolean isClick = false;
 
