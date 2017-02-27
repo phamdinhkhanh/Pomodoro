@@ -1,0 +1,71 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/screen_edge"
+    android:paddingEnd="@dimen/screen_edge"
+    android:paddingTop="@dimen/screen_edge"
+    tools:context="techkids.vn.android7pomodoro.fragments.TaskDetailFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/til_task_name"
+            android:layout_marginBottom="@dimen/inter_space">
+
+            <EditText
+                android:id="@+id/et_task_name"
+                android:hint="@string/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/til_task_payment"
+            android:layout_below="@id/til_task_name"
+            android:layout_marginBottom="@dimen/inter_space"
+            >
+
+            <EditText
+                android:id="@+id/et_payment_per_hour"
+                android:hint="@string/payment_per_hour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"/>
+
+        </android.support.design.widget.TextInputLayout>
+        <Switch
+            android:id="@+id/sw_isDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/switch_margin"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/til_task_payment"
+            android:layout_alignStart="@+id/til_task_payment"
+            />
+        <TextView
+            android:text="@string/done"
+            android:layout_toEndOf="@id/sw_isDone"
+
+            android:layout_alignBaseline="@id/sw_isDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/sw_isDone"
+            android:id="@+id/rv_task_color"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
