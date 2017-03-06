@@ -1,0 +1,54 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="techkids.vn.android7pomodoro.fragments.PomodoroFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <techkids.vn.android7pomodoro.activities.SquareRelative
+        android:id="@+id/sq"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingBottom="0dp">
+        <com.github.lzyzsd.circleprogress.DonutProgress
+            android:id="@+id/pg_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:donut_text_size="50dp"
+            app:donut_text_color="@color/colorPrimary"
+            app:circle_text_color="@color/collorTransparent"
+            android:rotation="0"
+            app:donut_progress="30"
+            app:donut_max="60"
+            />
+    </techkids.vn.android7pomodoro.activities.SquareRelative>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/sq"
+            >
+            <ImageButton
+                android:id="@+id/ib_pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat = "@drawable/ic_play_arrow_24px"
+                android:background="@color/collorTransparent"
+                android:layout_marginRight="40dp"/>
+            <ImageButton
+                android:id="@+id/ib_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_stop_white_24px"
+                android:background="@color/collorTransparent"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</FrameLayout>
